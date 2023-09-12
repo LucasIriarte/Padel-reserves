@@ -1,8 +1,8 @@
 import React from "react";
-import img from "/IconPadel.png"
+import img from "/IconPadel.png";
 
 
-export const Header = () => {
+function Header(){
     return (
         <nav>
             <div className="h-16 w-16">
@@ -11,3 +11,5 @@ export const Header = () => {
         </nav>
     )
 }
+
+export default Header

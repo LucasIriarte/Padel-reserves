@@ -1,8 +1,8 @@
-import React from "react"
-import { Header } from "../Header/Header"
-import Banner from "/public/Banner.jpeg"
+import React from "react";
+import Header from "../Header/Header";
+import Banner from "/public/Banner.jpeg";
 
-function Home() {
+function Home(){
     return (
         <>
             <Header/>
