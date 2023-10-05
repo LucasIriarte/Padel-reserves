@@ -1,7 +1,7 @@
 import { DataTypes, UUIDV4 } from "sequelize";
 import { sequelize } from "../database/database.js";
 
-
+import { Reserve } from './Reserve.js'
 
 export const User = sequelize.define('User', {
     id: {
@@ -22,3 +22,13 @@ export const User = sequelize.define('User', {
         allowNull: true
     }
 })
+
+User.hasMany(Reserve, {
+    foreignKey: 'UserId',
+    sourceKey: 'id'
+});
+
+Reserve.belongsTo(User, {
+    foreignKey: 'UserId',
+    targetId: 'id'
+});
