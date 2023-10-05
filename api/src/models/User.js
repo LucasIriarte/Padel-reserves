@@ -1,9 +1,9 @@
 import { DataTypes, UUIDV4 } from "sequelize";
-import { sequelize } from "../database/database";
+import { sequelize } from "../database/database.js";
 
 
 
-sequelize.define('user', {
+export const User = sequelize.define('User', {
     id: {
         type: DataTypes.UUID,
         primaryKey: true,
