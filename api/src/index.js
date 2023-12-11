@@ -1,9 +1,6 @@
 import app from './app.js';
 import { sequelize } from './database/database.js';
 
-import './models/Reserve.js';
-import './models/User.js';
-
 
 async function main(){
     try {
