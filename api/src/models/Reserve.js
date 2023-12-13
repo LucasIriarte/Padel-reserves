@@ -9,7 +9,7 @@ export const Reserve = sequelize.define('Reserve', {
         defaultValue:UUIDV4,
         primaryKey:true
     },
-    user_name: {
+    userName: {
         type: DataTypes.STRING,
         allowNull:false
     }
