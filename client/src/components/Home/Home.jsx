@@ -1,8 +1,13 @@
 import React from "react";
 import Header from "../Header/Header";
 import Banner from "/public/Banner.jpeg";
+import { useDispatch } from "react-redux";
+import { getReserves } from "../../redux/actions.jsx"
+
 
 function Home(){
+    const dispatch = useDispatch()
+    dispatch(getReserves())
     return (
         <>
             <Header/>
