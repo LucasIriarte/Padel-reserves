@@ -1,1 +1,0 @@
-export const GET_RESERVES = "GET_RESERVES"

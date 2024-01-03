@@ -1,7 +1,7 @@
 import { GET_RESERVES } from "./actionTypes"
 
 const initialState = {
-    reserves: []
+    reserves: ["holasdflkasjdñflkasjdñflkjasñdlfkj"]
 }
 
 function Reducer(state = initialState, action) {
