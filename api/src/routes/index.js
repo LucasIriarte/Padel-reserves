@@ -5,7 +5,7 @@ import userRoutes from './user.js';
 
 
 router.use('/reserves',reservesRoutes);
-router.use('/user',userRoutes);
+router.use('/users',userRoutes);
 
 
 
