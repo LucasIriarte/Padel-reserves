@@ -17,6 +17,16 @@ export const postReserve = async (req,res) => {
         where: {
             dateAppointment: dateAppointment,
             [Sequelize.Op.or]: [
+                //Un turno nuevo comienza y termina al mismo tiempo que uno en la bd
+                {
+                    shiftStart:shiftStart,
+                    shiftEnd:shiftEnd
+                },
+                //Un turno nuevo empieza antes de la bd y terminan en el mismo horario
+                {
+                    shiftStart: {[Sequelize.Op.gt]:shiftStart},
+                    shiftEnd: shiftEnd
+                },
                 //Un turno nuevo empieza entre medio de un turno en la bd
                 {
                     shiftStart: {[Sequelize.Op.lt]: shiftEnd},
