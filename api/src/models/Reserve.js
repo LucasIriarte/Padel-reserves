@@ -12,5 +12,21 @@ export const Reserve = sequelize.define('Reserve', {
     userName: {
         type: DataTypes.STRING,
         allowNull:false
+    },
+    dateAppointment: {
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    shiftStart: {
+        type: DataTypes.TIME,
+        allowNull:false
+    },
+    shiftEnd: {
+        type: DataTypes.TIME,
+        allowNull:false
+    },
+    phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull:false
     }
 })

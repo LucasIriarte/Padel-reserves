@@ -19,7 +19,8 @@ export const User = sequelize.define('User', {
     },
     admin: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: false
     }
 })
 
