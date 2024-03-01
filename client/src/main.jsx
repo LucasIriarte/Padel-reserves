@@ -12,6 +12,9 @@ axios.defaults.baseURL = 'http://localhost:3000'
 const AUTH0_DOMAIN = import.meta.env.REACT_APP_AUTH0_DOMAIN
 const AUTH0_CLIENT_ID = import.meta.env.REACT_APP_AUTH0_CLIENT_ID
 
+
+//ALLOWED CALLBACK URLS, ALLOWED LOGOUT URLS, ALLOWED WEB ORIGINS
+
 root.render(
     <Provider store={store}>
         <BrowserRouter>

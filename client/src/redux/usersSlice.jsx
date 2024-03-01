@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getUserDetails } from "./usersActions.jsx"
 
 
-const usersSlice = createSlice({
+export const userSlice = createSlice({
     name: "users",
     initialState:{
         user:"",
@@ -11,16 +11,18 @@ const usersSlice = createSlice({
     },
     reducers:{},
     extraReducers: (builder) => {
-        builder.addCase(usersSlice.pending, (state, action)=> {
+        builder.addCase(getUserDetails.pending, (state, action)=> {
             state.loading = true
         })
-        builder.addCase(usersSlice.fullfiled, (state, action) => {
+        builder.addCase(getUserDetails.fulfilled, (state, action) => {
             state.loading = false
             state.user = action.payload
         })
-        builder.addCase(usersSlice.rejected, (state, action) => {
+        builder.addCase(getUserDetails.rejected, (state, action) => {
             state.loading = false,
             state.error = action.error.message
         })
     }
 })
+
+export default userSlice.reducer
