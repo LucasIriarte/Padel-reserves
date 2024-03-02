@@ -5,6 +5,6 @@ export const getAllReserves = createAsyncThunk(
     'reserves/getReserves',
     async () => {
         const {data} = await axios.get('/reserves')
-        return console.log(data)
+        return data
     }
 )

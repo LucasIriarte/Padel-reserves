@@ -6,6 +6,6 @@ export const getUserDetails = createAsyncThunk(
     "user/userDetails",
     async (info) => {
         const { data } = await axios.post("/users",info)
-        return console.log(data)
+        return data
     }
 )
