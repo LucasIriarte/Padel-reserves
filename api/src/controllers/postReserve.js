@@ -2,10 +2,10 @@ import { Sequelize } from "sequelize";
 import { Reserve } from "../models/Reserve.js";
 
 export const postReserve = async (req,res) => {
-    const { userName, dateAppointment, shiftStart, shiftEnd, phoneNumber } = req.body
+    const { userName, dateAppointment, shiftStart, shiftEnd, phoneNumber, userId } = req.body
     console.log(shiftStart > shiftEnd)
     // nos fijamos que no falte datos
-    if(!userName || !dateAppointment || !shiftStart || !shiftEnd || !phoneNumber) {
+    if(!userName || !dateAppointment || !shiftStart || !shiftEnd || !phoneNumber || !userId) {
         return res.send("fields are required")
     }
     //No se puede empezar antes de terminar
@@ -51,6 +51,6 @@ export const postReserve = async (req,res) => {
         return res.send("Ese turno ya fue tomado")
     }
     //si no hay ningun turno encontrado se crea el turno
-    Reserve.create({ userName, dateAppointment, shiftStart, shiftEnd, phoneNumber })
-    return res.send("turno creado")
+    const reserveCreated = await Reserve.create({ userName, dateAppointment, shiftStart, shiftEnd, phoneNumber, userId })
+    return res.json(reserveCreated)
 };

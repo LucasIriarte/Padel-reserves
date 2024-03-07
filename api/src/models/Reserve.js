@@ -29,4 +29,8 @@ export const Reserve = sequelize.define('Reserve', {
         type: DataTypes.STRING,
         allowNull:false
     }
-})
+},
+{
+    timestamps:false
+}
+)

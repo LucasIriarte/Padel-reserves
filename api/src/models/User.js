@@ -22,14 +22,18 @@ export const User = sequelize.define('User', {
         allowNull: true,
         defaultValue: false
     }
-})
+},
+{
+    timestamps:false
+}
+)
 
 User.hasMany(Reserve, {
-    foreignKey: 'UserId',
+    foreignKey: 'userId',
     sourceKey: 'id'
 });
 
 Reserve.belongsTo(User, {
-    foreignKey: 'UserId',
+    foreignKey: 'userId',
     targetId: 'id'
 });
