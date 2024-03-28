@@ -5,7 +5,7 @@ import { getUserDetails } from "./usersActions.jsx"
 export const userSlice = createSlice({
     name: "users",
     initialState:{
-        user:"",
+        userDetails:"",
         loading:false,
         error:""
     },

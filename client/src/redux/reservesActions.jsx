@@ -3,8 +3,9 @@ import axios from 'axios';
 
 export const getAllReserves = createAsyncThunk(
     'reserves/getReserves',
-    async () => {
-        const {data} = await axios.get('/reserves')
+    async (dateAppointment) => {
+        const { data } = await axios.get(`/reserves/${dateAppointment}`)
+        console.log(data)
         return data
     }
 )
