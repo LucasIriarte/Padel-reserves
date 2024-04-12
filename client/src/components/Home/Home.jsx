@@ -29,15 +29,15 @@ function Home() {
                 <div>
                     <img src={Banner} alt="" />
                 </div>
+                <h2>{user.name}</h2>
+                <img src={user.picture} alt={user.name} />
+                <p>{user.email}</p>
+                {allReserves.length ? <h1>Hay reservas</h1> : <h1>Cargando...</h1>}
                 <div className="mx-auto text-center">
                     <button>atras</button>
                     <span>{`${day}/${month}/${year}`}</span>
                     <button>adelante</button>
                 </div>
-                <h2>{user.name}</h2>
-                <img src={user.picture} alt={user.name} />
-                <p>{user.email}</p>
-                {allReserves.length ? <h1>Hay reservas</h1> : <h1>Cargando...</h1>}
                 <TableReservations />
                 <h2>Reserva tu turno!</h2>
             </div>
