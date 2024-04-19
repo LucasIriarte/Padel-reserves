@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Banner from "/public/Banner.jpeg";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,13 +26,10 @@ function Home() {
         return (
             <div>
                 <Header />
-                <div>
+                <div className="relative flex items-center justify-center">
                     <img src={Banner} alt="" />
+                    <h1 className="absolute z-10 bg-black/[.3] w-full text-center text-slate-100 text-7xl font-bold">Padel title</h1>
                 </div>
-                <h2>{user.name}</h2>
-                <img src={user.picture} alt={user.name} />
-                <p>{user.email}</p>
-                {allReserves.length ? <h1>Hay reservas</h1> : <h1>Cargando...</h1>}
                 <div className="mx-auto text-center">
                     <button>atras</button>
                     <span>{`${day}/${month}/${year}`}</span>
@@ -43,7 +40,7 @@ function Home() {
             </div>
         )
     }
-    return <Loading/>
+    return <Loading />
 }
 
 export default Home

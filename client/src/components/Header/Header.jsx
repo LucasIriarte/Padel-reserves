@@ -16,7 +16,7 @@ function Header(){
         }))
     },[])
     return (
-        <nav>
+        <nav className="w-full bg-slate-100 drop-shadow-xl">
             <div className="h-16 w-16 flex">
                 <img src={img} alt="Icono padel" className="w-full"/>
             </div>
