@@ -6,8 +6,7 @@ import { getAllReserves } from "../../redux/reservesActions";
 import { TableReservations } from "../TableReservations/TableReservations";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../Loading/Loading";
-import { DateField, DatePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
+import AsideReservation from "../AsideReservation/AsideReservation";
 
 
 function Home() {
@@ -22,21 +21,25 @@ function Home() {
     useEffect(() => {
         dispatch(getAllReserves("25022024"))
     }, [])
-    if (user) {
+    if (!user) {
         return (
             <div>
-                <Header />
-                <div className="relative flex items-center justify-center">
-                    <img src={Banner} alt="" />
-                    <h1 className="absolute z-10 bg-black/[.3] w-full text-center text-slate-100 text-7xl font-bold">Padel title</h1>
+                {/* <Header /> */}
+                <div className="relative">
+                    {/* <AsideReservation /> */}
+                    <div className="relative flex items-center justify-center mt-6">
+                        <img src={Banner} alt="" />
+                        <h1 className="absolute z-10 bg-black/[.3] w-full text-center text-slate-100 text-7xl font-bold py-2 backdrop-blur-md">Padel court</h1>
+                    </div>
+                    <div className="mx-auto text-center">
+                        <button>atras</button>
+                        <span>{`${day}/${month}/${year}`}</span>
+                        <button>adelante</button>
+                    </div>
+                    {/* <AsideReservation /> */}
+                    <TableReservations />
+                    <h2>Reserva tu turno!</h2>
                 </div>
-                <div className="mx-auto text-center">
-                    <button>atras</button>
-                    <span>{`${day}/${month}/${year}`}</span>
-                    <button>adelante</button>
-                </div>
-                <TableReservations />
-                <h2>Reserva tu turno!</h2>
             </div>
         )
     }
