@@ -6,12 +6,14 @@ import AsideReservation from "../AsideReservation/AsideReservation";
 export const TableReservations = () => {
     const hours = []
     const [makeReserve, setMakeReserve] = useState(false)
+    const [hourReserve, setHourReserve] = useState("")
     for (let i = 9; i <= 23; i++) {
         i == 9 ? hours.push([`0${i}:00`, `0${i}:30`]) : i == 23 ? hours.push([`${i}:00`]) : hours.push([`${i}:00`, `${i}:30`])
     }
 
     const handlerMakeReserve = (e) => {
         setMakeReserve(!makeReserve)
+        setHourReserve(e)
     }
 
     return (
@@ -30,7 +32,7 @@ export const TableReservations = () => {
                     </tbody>
                 </table>
             </div>
-            {makeReserve && <AsideReservation onClose={() => setMakeReserve(false)}/>}
+            {makeReserve && <AsideReservation hourReserve={hourReserve} onClose={() => setMakeReserve(false)}/>}
         </>
     )
 }
