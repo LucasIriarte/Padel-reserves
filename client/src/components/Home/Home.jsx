@@ -31,11 +31,7 @@ function Home() {
                         <img src={Banner} alt="" />
                         <h1 className="absolute z-10 bg-black/[.3] w-full text-center text-slate-100 text-7xl font-bold py-2 backdrop-blur-md">Padel court</h1>
                     </div>
-                    <div className="mx-auto text-center">
-                        <button>atras</button>
-                        <span>{`${day}/${month}/${year}`}</span>
-                        <button>adelante</button>
-                    </div>
+                    
                     {/* <AsideReservation /> */}
                     <TableReservations />
                     <h2>Reserva tu turno!</h2>
