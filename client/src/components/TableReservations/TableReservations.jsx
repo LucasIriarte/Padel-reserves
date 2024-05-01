@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AsideReservation from "../AsideReservation/AsideReservation";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllReserves } from "../../redux/reservesActions";
+import { getBooking } from "../../redux/bookingActions";
 
 
 
 export const TableReservations = () => {
+    const booking = useSelector((state)=> state.booking.booking)
     const hours = []
     const [makeReserve, setMakeReserve] = useState(false)
     const [hourReserve, setHourReserve] = useState("")
     const date = new Date()
-    const day = date.getDate()
-    const month = date.getMonth()
-    const year = date.getFullYear()
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getBooking())
+    },[])
+    const handleDateAdvance = () => {
+        dispatch(getBooking({
+            payload:"advance",
+            dateStand:booking
+        }))
+    }
+    const handleDateBack = () => {
+        dispatch(getBooking({
+            payload:"back",
+            dateStand:booking
+        }))
+    }
     for (let i = 9; i <= 23; i++) {
         i == 9 ? hours.push([`0${i}:00`, `0${i}:30`]) : i == 23 ? hours.push([`${i}:00`]) : hours.push([`${i}:00`, `${i}:30`])
     }
@@ -26,9 +43,9 @@ export const TableReservations = () => {
         <>
             <div className="relative w-fit mx-auto">
                 <div className="mx-auto justify-center pt-10 pb-2 flex ">
-                    <MdOutlineArrowBackIos className="h-8 w-8 text-primary-4 border border-primary-5"/>
-                    <span className="h-8 text-primary-4 text-3xl border border-primary-5 flex justify-center items-center px-3">{`${day}/${month}/${year}`}</span>
-                    <MdOutlineArrowForwardIos className="h-8 w-8 text-primary-4 border border-primary-5"/>
+                    <MdOutlineArrowBackIos onClick={handleDateBack} className="h-8 w-8 text-primary-4 border-primary-5 border-y border-l"/>
+                    <span className="h-8 text-primary-4 text-3xl border border-primary-5 flex justify-center items-center px-3">{booking}</span>
+                    <MdOutlineArrowForwardIos onClick={handleDateAdvance} className="h-8 w-8 text-primary-4 border-y border-r border-primary-5"/>
                 </div>
 
                 <table className="relative z-10">

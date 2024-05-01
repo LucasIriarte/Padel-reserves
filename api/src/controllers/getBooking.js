@@ -5,17 +5,23 @@ export const getBooking = async (req, res) => {
         const { payload, dateStand } = req.query
         if (payload === "advance") {
             const partsDate = dateStand.split("/")
-            const dateTrue = new Date(parseInt(partsDate[2]),parseInt(partsDate[1]) -1,parseInt(partsDate[0]))
-            const day = dateTrue.getDate()
-            dateTrue.setDate(day+1)
-            return res.json(dateTrue)
+            const dateModified = new Date(parseInt(partsDate[2]),parseInt(partsDate[1]) -1,parseInt(partsDate[0]))
+            const day = dateModified.getDate()
+            dateModified.setDate(day+1)
+            const dayModified = dateModified.getDate()
+            const monthModified = dateModified.getMonth() + 1
+            const yearModified = dateModified.getFullYear()
+            return res.send(`${dayModified}/${monthModified}/${yearModified}`)
         }
         if (payload === "back") {
             const partsDate = dateStand.split("/")
-            const dateTrue = new Date(parseInt(partsDate[2]),parseInt(partsDate[1]) -1,parseInt(partsDate[0]))
-            const day = dateTrue.getDate()
-            dateTrue.setDate(day-1)
-            return res.json(dateTrue)
+            const dateModified = new Date(parseInt(partsDate[2]),parseInt(partsDate[1]) -1,parseInt(partsDate[0]))
+            const day = dateModified.getDate()
+            dateModified.setDate(day-1)
+            const dayModified = dateModified.getDate()
+            const monthModified = dateModified.getMonth() + 1
+            const yearModified = dateModified.getFullYear()
+            return res.send(`${dayModified}/${monthModified}/${yearModified}`)
         }
         const date = new Date()
         const day = date.getDate()

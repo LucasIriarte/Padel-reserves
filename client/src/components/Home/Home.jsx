@@ -13,10 +13,6 @@ function Home() {
     const allReserves = useSelector((state) => state.reserves.reserves)
     const dispatch = useDispatch()
     const { user } = useAuth0()
-    const date = new Date()
-    const day = date.getDate()
-    const month = date.getMonth()
-    const year = date.getFullYear()
 
     useEffect(() => {
         dispatch(getAllReserves("25022024"))
