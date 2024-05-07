@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getAllReserves } from './reservesActions.jsx';
 
 
-export const reservesSlice = createSlice({
+const reservesSlice = createSlice({
     name: "reserves",
     initialState:{
         reserves:[],

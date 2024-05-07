@@ -3,20 +3,20 @@ import AsideReservation from "../AsideReservation/AsideReservation";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllReserves } from "../../redux/reservesActions";
 import { getBooking } from "../../redux/bookingActions";
+import { getShedules } from "../../redux/shedulesActions";
 
 
 
 export const TableReservations = () => {
     const booking = useSelector((state)=> state.booking.booking)
-    const hours = []
+    const shedules = useSelector((state) => state.shedules.shedules)
     const [makeReserve, setMakeReserve] = useState(false)
     const [hourReserve, setHourReserve] = useState("")
-    const date = new Date()
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(getBooking())
+        dispatch(getShedules())
     },[])
     const handleDateAdvance = () => {
         dispatch(getBooking({
@@ -29,9 +29,6 @@ export const TableReservations = () => {
             payload:"back",
             dateStand:booking
         }))
-    }
-    for (let i = 9; i <= 23; i++) {
-        i == 9 ? hours.push([`0${i}:00`, `0${i}:30`]) : i == 23 ? hours.push([`${i}:00`]) : hours.push([`${i}:00`, `${i}:30`])
     }
 
     const handlerMakeReserve = (e) => {
@@ -52,7 +49,7 @@ export const TableReservations = () => {
                     <caption className="bg-slate-300 text-center font-bold h-12">Cancha padel</caption>
                     <tbody className="border-collapse">
                         {
-                            hours.flat().map(appointment => <tr key={appointment}>
+                            shedules.map(appointment => <tr key={appointment}>
                                 <td className="h-14 w-16 text-center border border-b-slate-300">{appointment}</td>
                                 <td className="border border-b-slate-300 w-64 h-14"> <button className="bg-fuchsia-600 w-full h-14" onClick={(e) => handlerMakeReserve(appointment)}>espacio disponible</button></td>
                             </tr>)
@@ -60,7 +57,7 @@ export const TableReservations = () => {
                     </tbody>
                 </table>
             </div>
-            {makeReserve && <AsideReservation hourReserve={hourReserve} onClose={() => setMakeReserve(false)} />}
+            {makeReserve && <AsideReservation hourReserve={hourReserve} onClose={() => setMakeReserve(false)}/>}
         </>
     )
 }

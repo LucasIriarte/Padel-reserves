@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { AiOutlineCloseSquare } from "react-icons/ai"
+import { useSelector } from "react-redux";
 
 
 const AsideReservation = ({ onClose, hourReserve }) => {
+    const booking = useSelector((state)=> state.booking.booking)
+    const shedules = useSelector((state)=> state.shedules.shedules)
     const validName = /^[A-Za-z\s]+$/;
     const validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     const validPhone = /^\d{10}$/;
@@ -16,7 +19,7 @@ const AsideReservation = ({ onClose, hourReserve }) => {
         name: "",
         phone: "",
         email: "",
-        dateAppointment:"",
+        dateAppointment:booking,
         hourShift:hourReserve,
         hourEnd:""
     })
@@ -54,6 +57,60 @@ const AsideReservation = ({ onClose, hourReserve }) => {
         }
         setErrors(newErrors)
     }
+    const handleOptionHour = (e) => {
+        const value = e.target.value
+        const valueEnd = (value) => {
+            return shedules[shedules.indexOf(hourReserve)+(value)]
+        }
+        if(value === "30"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(1)
+            })
+        }
+        if(value === "60"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(2)
+            })
+        }
+        if(value === "90"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(3)
+            })
+        }
+        if(value === "120"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(4)
+            })
+        }
+        if(value === "150"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(5)
+            })
+        }
+        if(value === "180"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(6)
+            })
+        }
+        if(value === "210"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(7)
+            })
+        }
+        if(value === "240"){
+            setForm({
+                ...form,
+                hourEnd: valueEnd(8)
+            })
+        }
+    }
 
     return (
         <div className="fixed top-0 right-0 w-screen h-screen bg-black/[.4] z-20 flex justify-end">
@@ -79,11 +136,17 @@ const AsideReservation = ({ onClose, hourReserve }) => {
                 </form>
                 <div className="pl-8">
                     <h3 className="text-xl pt-8">Duration:</h3>
-                    <div className="flex flex-wrap justify-between pr-2">
-                        <button className="border border-primary-1 rounded-md px-2 py-1 my-2 text-primary-2 bg-gray-100 hover:bg-gray-300 font-bold">One hour</button>
-                        <button className="border border-primary-1 rounded-md px-2 py-1 my-2 text-primary-2 bg-gray-100 hover:bg-gray-300 font-bold">Hour and a half</button>
-                        <button className="border border-primary-1 rounded-md px-2 py-1 my-2 text-primary-2 bg-gray-100 hover:bg-gray-300 font-bold">Two hours</button>
-                        <button className="border border-primary-1 rounded-md px-2 py-1 my-2 text-primary-2 bg-gray-100 hover:bg-gray-300 font-bold">Two hours and a half</button>
+                    <div className="w-full">
+                        <select name="" id="" onChange={handleOptionHour}>
+                            <option value="30">Half hour</option>
+                            <option value="60">1 Hour</option>
+                            <option value="90">1 Hour and half</option>
+                            <option value="120">2 Hours</option>
+                            <option value="150">2 Hours and half</option>
+                            <option value="180">3 Hours</option>
+                            <option value="210">3 Hours and half</option>
+                            <option value="240">4 Hours</option>
+                        </select>
                     </div>
                 </div>
                 <div className="flex justify-center">
