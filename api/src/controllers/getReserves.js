@@ -1,20 +1,12 @@
+import { getReservesHelpers } from "../helpers/getReserveHelper.js";
 import { Reserve } from "../models/Reserve.js";
 
-export const getReserves = async (req,res) => {
-    const dateAppointment = req.params.dateAppointment
-    const day = dateAppointment.slice(0,2)
-    const month = dateAppointment.slice(2,4)
-    const year = dateAppointment.slice(4,8)
-    const dateAppointmentFormated = day + "/" + month + "/" + year
-
+export const getReserves = async (req, res) => {
     try {
-        const reserves = await Reserve.findAll({
-            where: {
-                dateAppointment:dateAppointmentFormated
-            }
-        })
+        const { dateAppointment } = req.params
+        const reserves = await getReservesHelpers(dateAppointment)
         return res.status(200).json(reserves)
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        return res.status(500).json({ message: error.message })
     }
 };

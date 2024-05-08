@@ -41,75 +41,28 @@ const AsideReservation = ({ onClose, hourReserve }) => {
             newErrors.name=""
         }
         if(!validName.test(form.name) && form.name !== ""){
-            newErrors.name="ahí hay numeros papi"
+            newErrors.name="no numbers in the name"
         }
         if(validPhone.test(form.phone)){
             newErrors.phone=""
         }
         if(!validPhone.test(form.phone)){
-            newErrors.phone="tiene que tener 10 nums si o sí papi"
+            newErrors.phone="It should only have 10 numbers"
         }
         if(validEmail.test(form.email)){
             newErrors.email = ""
         }
         if(!validEmail.test(form.email) && form.email !== ""){
-            newErrors.email = "email no valido papi"
+            newErrors.email = "email is not valid"
         }
         setErrors(newErrors)
     }
     const handleOptionHour = (e) => {
         const value = e.target.value
-        const valueEnd = (value) => {
-            return shedules[shedules.indexOf(hourReserve)+(value)]
-        }
-        if(value === "30"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(1)
-            })
-        }
-        if(value === "60"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(2)
-            })
-        }
-        if(value === "90"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(3)
-            })
-        }
-        if(value === "120"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(4)
-            })
-        }
-        if(value === "150"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(5)
-            })
-        }
-        if(value === "180"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(6)
-            })
-        }
-        if(value === "210"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(7)
-            })
-        }
-        if(value === "240"){
-            setForm({
-                ...form,
-                hourEnd: valueEnd(8)
-            })
-        }
+        setForm({
+            ...form,
+            hourEnd:value
+        })
     }
 
     return (
@@ -138,14 +91,14 @@ const AsideReservation = ({ onClose, hourReserve }) => {
                     <h3 className="text-xl pt-8">Duration:</h3>
                     <div className="w-full">
                         <select name="" id="" onChange={handleOptionHour}>
-                            <option value="30">Half hour</option>
-                            <option value="60">1 Hour</option>
-                            <option value="90">1 Hour and half</option>
-                            <option value="120">2 Hours</option>
-                            <option value="150">2 Hours and half</option>
-                            <option value="180">3 Hours</option>
-                            <option value="210">3 Hours and half</option>
-                            <option value="240">4 Hours</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+1]}>Half hour</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+2]}>1 Hour</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+3]}>1 Hour and half</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+4]}>2 Hours</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+5]}>2 Hours and half</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+6]}>3 Hours</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+7]}>3 Hours and half</option>
+                            <option value={shedules[shedules.indexOf(hourReserve)+8]}>4 Hours</option>
                         </select>
                     </div>
                 </div>
