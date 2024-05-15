@@ -8,8 +8,8 @@ axios.defaults.baseURL = "http://localhost:3000"
 function App() {
   return (
       <Routes>
-        {/* <Route path="/" element={<LoginPage />}/>
-        <Route path="/home" element={<Home/>}/> */}
+        <Route path="/" element={<LoginPage />}/>
+        <Route path="/home" element={<Home/>}/>
         <Route path="/" element={<Home/>}/>
       </Routes>
   )

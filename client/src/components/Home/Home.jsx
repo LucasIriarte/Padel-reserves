@@ -13,29 +13,23 @@ function Home() {
     const allReserves = useSelector((state) => state.reserves.reserves)
     const dispatch = useDispatch()
     const { user } = useAuth0()
-
+    console.log(user)
     useEffect(() => {
         dispatch(getAllReserves("25022024"))
     }, [])
-    if (!user) {
         return (
             <div>
-                {/* <Header /> */}
+                <Header />
                 <div className="relative">
-                    {/* <AsideReservation /> */}
                     <div className="relative flex items-center justify-center mt-6">
                         <img src={Banner} alt="" />
                         <h1 className="absolute z-10 bg-black/[.3] w-full text-center text-slate-100 text-7xl font-bold py-2 backdrop-blur-md">Padel court</h1>
                     </div>
-                    
-                    {/* <AsideReservation /> */}
                     <TableReservations />
                     <h2>Reserva tu turno!</h2>
                 </div>
             </div>
         )
-    }
-    return <Loading />
 }
 
 export default Home
