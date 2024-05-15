@@ -15,7 +15,6 @@ function Header(){
                 name: user.name,
                 email: user.email
             }))
-            console.log(userDetails)
         }
     },[user,dispatch])
     return (
