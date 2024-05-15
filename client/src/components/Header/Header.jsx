@@ -16,6 +16,7 @@ function Header(){
                 email: user.email
             }))
         }
+        console.log(userDetails)
     },[user,dispatch])
     return (
         <nav className="w-full bg-slate-100 drop-shadow-xl">
