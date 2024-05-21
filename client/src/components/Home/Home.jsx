@@ -13,7 +13,6 @@ function Home() {
     const allReserves = useSelector((state) => state.reserves.reserves)
     const dispatch = useDispatch()
     const { user } = useAuth0()
-    console.log(user)
     useEffect(() => {
         dispatch(getAllReserves("25022024"))
     }, [])
