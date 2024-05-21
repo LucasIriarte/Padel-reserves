@@ -12,7 +12,8 @@ export const getAllReserves = createAsyncThunk(
 export const createReserve = createAsyncThunk(
     "reserves/createReserve",
     async (infoReserve) => {
-        // const { data } = await axios.post("/reserves", infoReserve)
+        const { data } = await axios.post("/reserves", infoReserve)
         console.log(infoReserve)
+        console.log(data)
     }
 )

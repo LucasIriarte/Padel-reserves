@@ -11,6 +11,7 @@ import { getShedules } from "../../redux/shedulesActions";
 export const TableReservations = () => {
     const booking = useSelector((state)=> state.booking.booking)
     const shedules = useSelector((state) => state.shedules.shedules)
+    console.log(booking)
     const [makeReserve, setMakeReserve] = useState(false)
     const [hourReserve, setHourReserve] = useState("")
     const dispatch = useDispatch()
