@@ -8,3 +8,11 @@ export const getAllReserves = createAsyncThunk(
         return data
     }
 )
+
+export const createReserve = createAsyncThunk(
+    "reserves/createReserve",
+    async (infoReserve) => {
+        // const { data } = await axios.post("/reserves", infoReserve)
+        console.log(infoReserve)
+    }
+)

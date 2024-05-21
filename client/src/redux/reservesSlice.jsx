@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllReserves } from './reservesActions.jsx';
+import { createReserve, getAllReserves } from './reservesActions.jsx';
 
 
 const reservesSlice = createSlice({
@@ -21,6 +21,15 @@ const reservesSlice = createSlice({
         builder.addCase(getAllReserves.rejected, (state, action)=>{
             state.loading = false
             state.error = action.error.message
+        }),
+        builder.addCase(createReserve.pending,(state,action)=>{
+            state.loading = true
+        }),
+        builder.addCase(createReserve.fulfilled,(state,action)=>{
+            state.loading = false
+        }),
+        builder.addCase(createReserve.rejected,(state,action)=>{
+            state.loading = false
         })
     }
 })
