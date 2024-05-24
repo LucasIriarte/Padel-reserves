@@ -1,10 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-export const getAllReserves = createAsyncThunk(
+export const getReservesDay = createAsyncThunk(
     'reserves/getReserves',
-    async (dateAppointment) => {
-        const { data } = await axios.get(`/reserves/${dateAppointment}`)
-        return data
+    async (date) => {
+        console.log(date)
+        const { data } = await axios.get('/reserves', { params: date });
+        console.log(data)
+        return data;
     }
-)
+);

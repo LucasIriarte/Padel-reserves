@@ -5,11 +5,13 @@ import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooking } from "../../redux/bookingActions";
 import { getShedules } from "../../redux/shedulesActions";
+import { getReservesDay } from "../../redux/reservesActions";
 
 
 
 export const TableReservations = () => {
     const booking = useSelector((state)=> state.booking.booking)
+    const reservesDay = useSelector((state)=> state.reservesDay)
     const shedules = useSelector((state) => state.shedules.shedules)
     const [makeReserve, setMakeReserve] = useState(false)
     const [hourReserve, setHourReserve] = useState("")
@@ -18,6 +20,9 @@ export const TableReservations = () => {
         dispatch(getBooking())
         dispatch(getShedules())
     },[])
+    useEffect(()=> {
+        dispatch(getReservesDay({ date: booking }));
+    },[booking])
     const handleDateAdvance = () => {
         dispatch(getBooking({
             payload:"advance",
@@ -34,6 +39,13 @@ export const TableReservations = () => {
     const handlerMakeReserve = (e) => {
         setMakeReserve(!makeReserve)
         setHourReserve(e)
+    }
+    if (reservesDay.loading) {
+        return <p>Loading...</p>;
+    }
+
+    if (reservesDay.error) {
+        return <p>Error: {reservesDay.error}</p>;
     }
 
     return (

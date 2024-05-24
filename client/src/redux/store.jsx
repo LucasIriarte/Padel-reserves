@@ -6,7 +6,7 @@ import shedulesSlice from "./shedulesSlice.jsx";
 
 export default configureStore({
     reducer: {
-        reserves: reservesSlice,
+        reservesDay: reservesSlice,
         userDetails: userSlice,
         booking: bookingSlice,
         shedules: shedulesSlice

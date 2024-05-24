@@ -3,7 +3,7 @@ import { getUserDetails } from "./usersActions.jsx"
 
 
 export const userSlice = createSlice({
-    name: "users",
+    name: "user",
     initialState:{
         userDetails:"",
         loading:false,
@@ -16,7 +16,7 @@ export const userSlice = createSlice({
         })
         builder.addCase(getUserDetails.fulfilled, (state, action) => {
             state.loading = false
-            state.user = action.payload
+            state.userDetails = action.payload
         })
         builder.addCase(getUserDetails.rejected, (state, action) => {
             state.loading = false,
