@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloseSquare } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux";
-import { createReserve } from "../../redux/reservesActions";
 import Swal from "sweetalert2"
 import axios from "axios";
 
 
 const AsideReservation = ({ onClose, hourReserve }) => {
-    const dispatch = useDispatch()
     const userDetails = useSelector((state) => state.userDetails.userDetails)
     const booking = useSelector((state) => state.booking.booking)
     const shedules = useSelector((state) => state.shedules.shedules)
