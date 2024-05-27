@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Banner from "/public/Banner.jpeg";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllReserves } from "../../redux/reservesActions";
 import { TableReservations } from "../TableReservations/TableReservations";
-import { useAuth0 } from "@auth0/auth0-react";
-import Loading from "../Loading/Loading";
-import AsideReservation from "../AsideReservation/AsideReservation";
 
 
 function Home() {
-    const allReserves = useSelector((state) => state.reserves.reserves)
-    const dispatch = useDispatch()
-    const { user } = useAuth0()
-    useEffect(() => {
-        dispatch(getAllReserves("25022024"))
-    }, [])
+    
         return (
             <div>
                 <Header />

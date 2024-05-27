@@ -48,9 +48,9 @@ export const postReserveHelper = async (dataReserve) => {
 
     //si hay algun turno ponemos que hay un turno encontrado
     if (findReserve.length > 0) {
-        return "Ese turno ya fue tomado"
+        return "that shift has already been taken"
     }
     //si no hay ningun turno encontrado se crea el turno
-    const reserveCreated = await Reserve.create({ userName, dateAppointment, shiftStart, shiftEnd, phoneNumber, userId })
-    return reserveCreated.dataValues
+    await Reserve.create({ userName, dateAppointment, shiftStart, shiftEnd, phoneNumber, userId })
+    return "Reserve created successfull!"
 }

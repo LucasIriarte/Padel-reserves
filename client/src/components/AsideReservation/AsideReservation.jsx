@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloseSquare } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux";
-import { createReserve } from "../../redux/reservesActions";
+import Swal from "sweetalert2"
+import axios from "axios";
 
 
 const AsideReservation = ({ onClose, hourReserve }) => {
-    const dispatch = useDispatch()
     const userDetails = useSelector((state) => state.userDetails.userDetails)
     const booking = useSelector((state) => state.booking.booking)
     const shedules = useSelector((state) => state.shedules.shedules)
@@ -14,20 +14,22 @@ const AsideReservation = ({ onClose, hourReserve }) => {
     const validPhone = /^\d{10}$/;
     const isMounted = useRef(false)
     const initialStateErrors = {
-        name: "",
-        phone: "",
+        userName: "",
+        phoneNumber: "",
         email: "",
-        hourEnd: ""
+        shiftEnd: ""
     }
     const [errors, setErrors] = useState(initialStateErrors)
-    const [form, setForm] = useState({
-        name: "",
-        phone: "",
+    const initialStateForm = {
+        userName: "",
+        phoneNumber: "",
         email: "",
         dateAppointment: booking,
-        hourShift: hourReserve,
-        hourEnd: ""
-    })
+        shiftStart: hourReserve,
+        shiftEnd: "",
+        userId: userDetails.id
+    }
+    const [form, setForm] = useState(initialStateForm)
     const handleForm = (e) => {
         setForm({
             ...form,
@@ -35,10 +37,25 @@ const AsideReservation = ({ onClose, hourReserve }) => {
         })
     }
     useEffect(() => {
-        console.log("useEffect")
         if (isMounted.current) {
             if (JSON.stringify(errors) === JSON.stringify(initialStateErrors)) {
-                dispatch(createReserve(form));
+                axios.post("/reserves", form)
+                    .then((value) => {
+                        if (value.data === "that shift has already been taken") {
+                            Swal.fire({
+                                icon: "error",
+                                title: value.data,
+                            });
+                            setForm(initialStateForm)
+                        }
+                        if (value.data === "Reserve created successfull!") {
+                            Swal.fire({
+                                icon: "success",
+                                title: value.data,
+                            });
+                            setForm(initialStateForm)
+                        }
+                    })
             }
         } else {
             isMounted.current = true;
@@ -50,24 +67,24 @@ const AsideReservation = ({ onClose, hourReserve }) => {
     }
 
     const validate = () => {
-        const newErrors = {...initialStateErrors}
-        if (validName.test(form.name)) {
-            newErrors.name = ""
+        const newErrors = { ...initialStateErrors }
+        if (validName.test(form.userName)) {
+            newErrors.userName = ""
         }
-        if (!form.name) {
-            newErrors.name = "The name is required"
+        if (!form.userName) {
+            newErrors.userName = "The name is required"
         }
-        if (!validName.test(form.name) && form.name !== "") {
-            newErrors.name = "No numbers in the name"
+        if (!validName.test(form.userName) && form.userName !== "") {
+            newErrors.userName = "No numbers in the name"
         }
-        if(!form.phone){
-            newErrors.phone="The phone is required"
+        if (!form.phoneNumber) {
+            newErrors.phoneNumber = "The phone is required"
         }
-        if (validPhone.test(form.phone)) {
-            newErrors.phone = ""
+        if (validPhone.test(form.phoneNumber)) {
+            newErrors.phoneNumber = ""
         }
-        if (!validPhone.test(form.phone)) {
-            newErrors.phone = "It should have 10 numbers"
+        if (!validPhone.test(form.phoneNumber)) {
+            newErrors.phoneNumber = "It should have 10 numbers"
         }
         if (validEmail.test(form.email)) {
             newErrors.email = ""
@@ -75,17 +92,16 @@ const AsideReservation = ({ onClose, hourReserve }) => {
         if (!validEmail.test(form.email) && form.email !== "") {
             newErrors.email = "Email is not valid"
         }
-        if (!form.hourEnd) {
-            newErrors.hourEnd = "Shift duration is required"
+        if (!form.shiftEnd) {
+            newErrors.shiftEnd = "Shift duration is required"
         }
         setErrors(newErrors)
-        console.log(errors)
     }
     const handleOptionHour = (e) => {
         const value = e.target.value
         setForm({
             ...form,
-            hourEnd: value
+            shiftEnd: value
         })
     }
 
@@ -100,13 +116,13 @@ const AsideReservation = ({ onClose, hourReserve }) => {
                 <form action="" className="flex flex-col items-start justify-around h-auto pl-8 pt-4 w-full">
                     <div className="flex flex-col w-full relative">
                         <label className="text-xl">Name <strong className="text-red-700">*</strong></label>
-                        <input type="text" onChange={(e) => handleForm(e)} value={form.name} name="name" className="w-5/6 h-10 rounded-lg mt-1 border border-primary-5 placeholder:text-gray-300 pl-2 focus:outline-none" placeholder="Martín..." />
-                        {errors.name && <span className="absolute top-1 right-16 text-red-700 font-bold">{errors.name}</span>}
+                        <input type="text" onChange={(e) => handleForm(e)} value={form.userName} name="userName" className="w-5/6 h-10 rounded-lg mt-1 border border-primary-5 placeholder:text-gray-300 pl-2 focus:outline-none" placeholder="Martín..." />
+                        {errors.userName && <span className="absolute top-1 right-16 text-red-700 font-bold">{errors.userName}</span>}
                     </div>
                     <div className="flex flex-col w-full pt-5 relative">
                         <label className="text-xl">Phone <strong className="text-red-700">*</strong></label>
-                        <input type="number" onChange={(e) => handleForm(e)} value={form.phone} name="phone" className="w-5/6 h-10 rounded-lg mt-1 border border-primary-5 placeholder:text-gray-300 pl-2 focus:outline-none" placeholder="1154649853" />
-                        {errors.phone && <span className="absolute top-6 right-16 text-red-700 font-bold">{errors.phone}</span>}
+                        <input type="number" onChange={(e) => handleForm(e)} value={form.phoneNumber} name="phoneNumber" className="w-5/6 h-10 rounded-lg mt-1 border border-primary-5 placeholder:text-gray-300 pl-2 focus:outline-none" placeholder="1154649853" />
+                        {errors.phoneNumber && <span className="absolute top-6 right-16 text-red-700 font-bold">{errors.phoneNumber}</span>}
                     </div>
                     <div className="flex flex-col w-full pt-5 relative">
                         <label className="text-xl">Email (optional)</label>
@@ -128,7 +144,7 @@ const AsideReservation = ({ onClose, hourReserve }) => {
                             <option value={shedules[shedules.indexOf(hourReserve) + 7]}>3 Hours and half</option>
                             <option value={shedules[shedules.indexOf(hourReserve) + 8]}>4 Hours</option>
                         </select>
-                        {errors.hourEnd && <span className="absolute top-[-1.5rem] left-20 text-red-700 font-bold">{errors.hourEnd}</span>}
+                        {errors.shiftEnd && <span className="absolute top-[-1.5rem] left-20 text-red-700 font-bold">{errors.shiftEnd}</span>}
                     </div>
                 </div>
                 <div className="flex justify-center">
