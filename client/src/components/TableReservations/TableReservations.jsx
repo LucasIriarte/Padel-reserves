@@ -10,29 +10,29 @@ import { getReservesDay } from "../../redux/reservesActions";
 
 
 export const TableReservations = () => {
-    const booking = useSelector((state)=> state.booking.booking)
-    const reservesDay = useSelector((state)=> state.reservesDay)
+    const booking = useSelector((state) => state.booking.booking)
+    const reservesDay = useSelector((state) => state.reservesDay.reservesDay)
     const shedules = useSelector((state) => state.shedules.shedules)
     const [makeReserve, setMakeReserve] = useState(false)
     const [hourReserve, setHourReserve] = useState("")
     const dispatch = useDispatch()
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getBooking())
         dispatch(getShedules())
-    },[])
-    useEffect(()=> {
+    }, [])
+    useEffect(() => {
         dispatch(getReservesDay({ date: booking }));
-    },[booking])
+    }, [booking])
     const handleDateAdvance = () => {
         dispatch(getBooking({
-            payload:"advance",
-            dateStand:booking
+            payload: "advance",
+            dateStand: booking
         }))
     }
     const handleDateBack = () => {
         dispatch(getBooking({
-            payload:"back",
-            dateStand:booking
+            payload: "back",
+            dateStand: booking
         }))
     }
 
@@ -52,24 +52,51 @@ export const TableReservations = () => {
         <>
             <div className="relative w-fit mx-auto">
                 <div className="mx-auto justify-center pt-10 pb-2 flex ">
-                    <MdOutlineArrowBackIos onClick={handleDateBack} className="h-8 w-8 text-primary-4 border-primary-5 border-y border-l"/>
+                    <MdOutlineArrowBackIos onClick={handleDateBack} className="h-8 w-8 text-primary-4 border-primary-5 border-y border-l" />
                     <span className="h-8 text-primary-4 text-3xl border border-primary-5 flex justify-center items-center px-3">{booking}</span>
-                    <MdOutlineArrowForwardIos onClick={handleDateAdvance} className="h-8 w-8 text-primary-4 border-y border-r border-primary-5"/>
+                    <MdOutlineArrowForwardIos onClick={handleDateAdvance} className="h-8 w-8 text-primary-4 border-y border-r border-primary-5" />
                 </div>
-
-                <table className="relative z-10">
-                    <caption className="bg-slate-300 text-center font-bold h-12">Cancha padel</caption>
-                    <tbody className="border-collapse">
+                <div className="relative">
+                    <table className="w-80 border-collapse border border-black">
+                        <caption className="bg-slate-300 text-center font-bold h-12">Cancha padel</caption>
+                        <tbody>
+                            {
+                                shedules.map((appointment) => {
+                                    return (
+                                        <tr key={appointment} className="h-14">
+                                            <td className="h-14 w-16 text-center border border-black"><span>{appointment}</span></td>
+                                            <td className="h-14 w-64"> <button className=" font-bold w-full h-full border border-black" onClick={(e) => handlerMakeReserve(appointment)}
+                                            >Available slot</button></td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                    <div className="absolute
+                    top-12 w-full right-0">
                         {
-                            shedules.map(appointment => <tr key={appointment}>
-                                <td className="h-14 w-16 text-center border border-b-slate-300">{appointment}</td>
-                                <td className="border border-b-slate-300 w-64 h-14"> <button className="bg-fuchsia-600 w-full h-14" onClick={(e) => handlerMakeReserve(appointment)}>espacio disponible</button></td>
-                            </tr>)
+                            reservesDay && reservesDay.map((e) => {
+                                const indexStart = shedules.indexOf(e.shiftStart.slice(0, 5))
+                                const indexEnd = shedules.indexOf(e.shiftEnd.slice(0, 5))
+                                const height = (indexEnd - indexStart) * 3.5
+                                const top = indexStart * 3.5
+                                return (
+                                    <div key={e.id} className="w-64 ml-16 text-center bg-slate-600 absolute"
+                                        style={{
+                                            height: `${height}rem`,
+                                            top: `${top}rem`
+                                        }}
+                                    >
+                                        <h2>{e.shiftStart} / {e.shiftEnd}</h2>
+                                    </div>
+                                )
+                            })
                         }
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
-            {makeReserve && <AsideReservation hourReserve={hourReserve} onClose={() => setMakeReserve(false)}/>}
+            {makeReserve && <AsideReservation hourReserve={hourReserve} onClose={() => setMakeReserve(false)} />}
         </>
     )
 }
