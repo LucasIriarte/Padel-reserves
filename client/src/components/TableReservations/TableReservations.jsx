@@ -11,7 +11,7 @@ import { getReservesDay } from "../../redux/reservesActions";
 
 export const TableReservations = () => {
     const booking = useSelector((state) => state.booking.booking)
-    const reservesDay = useSelector((state) => state.reservesDay.reservesDay)
+    const reservesDay = useSelector((state) => state.reservesDay)
     const shedules = useSelector((state) => state.shedules.shedules)
     const [makeReserve, setMakeReserve] = useState(false)
     const [hourReserve, setHourReserve] = useState("")
@@ -21,7 +21,7 @@ export const TableReservations = () => {
         dispatch(getShedules())
     }, [])
     useEffect(() => {
-        dispatch(getReservesDay({ date: booking }));
+        dispatch(getReservesDay(booking));
     }, [booking])
     const handleDateAdvance = () => {
         dispatch(getBooking({
@@ -45,9 +45,8 @@ export const TableReservations = () => {
     }
 
     if (reservesDay.error) {
-        return <p>Error: {reservesDay.error}</p>;
+        return <p>Error: {reservesDay.reservesDay.error}</p>;
     }
-
     return (
         <>
             <div className="relative w-fit mx-auto">
@@ -65,7 +64,7 @@ export const TableReservations = () => {
                                     return (
                                         <tr key={appointment} className="h-14">
                                             <td className="h-14 w-16 text-center border border-black"><span>{appointment}</span></td>
-                                            <td className="h-14 w-64"> <button className=" font-bold w-full h-full border border-black" onClick={(e) => handlerMakeReserve(appointment)}
+                                            <td className="h-14 w-64 border border-black"> <button className=" font-bold w-full h-full" onClick={(e) => handlerMakeReserve(appointment)}
                                             >Available slot</button></td>
                                         </tr>
                                     )
@@ -76,7 +75,7 @@ export const TableReservations = () => {
                     <div className="absolute
                     top-12 w-full right-0">
                         {
-                            reservesDay && reservesDay.map((e) => {
+                            reservesDay.reservesDay && reservesDay.reservesDay.map((e) => {
                                 const indexStart = shedules.indexOf(e.shiftStart.slice(0, 5))
                                 const indexEnd = shedules.indexOf(e.shiftEnd.slice(0, 5))
                                 const height = (indexEnd - indexStart) * 3.5
