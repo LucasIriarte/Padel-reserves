@@ -3,9 +3,11 @@ import { AiOutlineCloseSquare } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2"
 import axios from "axios";
+import { getReservesDay } from "../../redux/reservesActions";
 
 
 const AsideReservation = ({ onClose, hourReserve }) => {
+    const dispatch = useDispatch()
     const userDetails = useSelector((state) => state.userDetails.userDetails)
     const booking = useSelector((state) => state.booking.booking)
     const shedules = useSelector((state) => state.shedules.shedules)
@@ -45,15 +47,20 @@ const AsideReservation = ({ onClose, hourReserve }) => {
                             Swal.fire({
                                 icon: "error",
                                 title: value.data,
+                                showConfirmButton: false,
                             });
                             setForm(initialStateForm)
+                            dispatch(getReservesDay(booking))
+                            onClose()
                         }
                         if (value.data === "Reserve created successfull!") {
                             Swal.fire({
-                                icon: "success",
-                                title: value.data,
-                            });
+                                title: value.data ,
+                                confirmButtonText: "Ok",
+                            })
                             setForm(initialStateForm)
+                            dispatch(getReservesDay(booking))
+                            onClose()
                         }
                     })
             }
@@ -110,6 +117,9 @@ const AsideReservation = ({ onClose, hourReserve }) => {
             <div className="bg-white w-4/5">
                 <div>
                     <AiOutlineCloseSquare className="h-8 w-8" onClick={onClose} />
+                </div>
+                <div>
+                    <button onClick={()=>dispatch(getReservesDay(booking))}>Probando</button>
                 </div>
                 <h1 className="text-center text-4xl font-bold font-bebas">Reservation at {hourReserve}</h1>
                 <h3 className="pl-8 pt-8 text-2xl">Information reserve</h3>
