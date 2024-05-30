@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AsideReservation from "../AsideReservation/AsideReservation";
-import { MdOutlineArrowBackIos } from "react-icons/md";
-import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getBooking } from "../../redux/bookingActions";
 import { getShedules } from "../../redux/shedulesActions";
 import { getReservesDay } from "../../redux/reservesActions";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 
 
@@ -53,7 +52,7 @@ export const TableReservations = () => {
     return (
         <>
             <div className="relative w-fit mx-auto">
-                <div className="mx-auto justify-center mt-10 pb-0 flex bg-white w-fit rounded-t-xl border border-slate-400">
+                <div className="mx-auto justify-center mt-10 pb-0 flex bg-white w-fit rounded-t-xl border-t border-l border-r border-slate-400">
                     <IoIosArrowDropleft onClick={handleDateBack} className="h-10 w-10 text-primary-4 border-primary-5" />
                     <span className="h-10 text-primary-4 text-3xl flex justify-center items-center px-3">{booking}</span>
                     <IoIosArrowDropright onClick={handleDateAdvance} className="h-10 w-10 text-primary-4" />
@@ -98,7 +97,8 @@ export const TableReservations = () => {
                                             style={{
                                                 height: `${height}rem`
                                             }}>
-                                            <h2>{e.shiftStart} / {e.shiftEnd}</h2>
+                                                <IoPersonCircleOutline className="text-white h-5 w-5"/>
+                                            <h2 className="text-white font-bold">{e.shiftStart} / {e.shiftEnd}</h2>
                                         </div>
                                     </div>
                                 )
