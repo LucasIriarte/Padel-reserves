@@ -138,7 +138,7 @@ const AsideReservation = ({ onClose, hourReserve }) => {
                     </div>
                 </form>
                 <div className="pl-8">
-                    <h3 className="text-xl pt-8">Duration:</h3>
+                    <h3 className="text-xl pt-8">Duration:<strong className="text-red-700">*</strong></h3>
                     <div className="w-full relative">
                         <select defaultValue={""} onChange={handleOptionHour}>
                             <option value={""} disabled>-- Hours --</option>
