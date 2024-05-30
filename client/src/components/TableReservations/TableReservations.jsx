@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBooking } from "../../redux/bookingActions";
 import { getShedules } from "../../redux/shedulesActions";
 import { getReservesDay } from "../../redux/reservesActions";
+import { IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropright } from "react-icons/io";
+
 
 
 
@@ -50,21 +53,24 @@ export const TableReservations = () => {
     return (
         <>
             <div className="relative w-fit mx-auto">
-                <div className="mx-auto justify-center pt-10 pb-2 flex ">
-                    <MdOutlineArrowBackIos onClick={handleDateBack} className="h-8 w-8 text-primary-4 border-primary-5 border-y border-l" />
-                    <span className="h-8 text-primary-4 text-3xl border border-primary-5 flex justify-center items-center px-3">{booking}</span>
-                    <MdOutlineArrowForwardIos onClick={handleDateAdvance} className="h-8 w-8 text-primary-4 border-y border-r border-primary-5" />
+                <div className="mx-auto justify-center mt-10 pb-0 flex bg-white w-fit rounded-t-xl border border-slate-400">
+                    <IoIosArrowDropleft onClick={handleDateBack} className="h-10 w-10 text-primary-4 border-primary-5" />
+                    <span className="h-10 text-primary-4 text-3xl flex justify-center items-center px-3">{booking}</span>
+                    <IoIosArrowDropright onClick={handleDateAdvance} className="h-10 w-10 text-primary-4" />
                 </div>
-                <div className="relative">
-                    <table className="w-80 border-collapse border border-black">
-                        <caption className="bg-slate-300 text-center font-bold h-12">Cancha padel</caption>
+                <div className="relative rounded-xl overflow-hidden border border-slate-400">
+                    <table className="w-80 border-collapse bg-white">
+                        <caption className="bg-white text-center font-bold h-12 text-4xl rounded-t-xl">Padel court</caption>
                         <tbody>
                             {
                                 shedules.map((appointment) => {
+                                    if(appointment === "23:00") {
+                                        return null
+                                    }
                                     return (
                                         <tr key={appointment} className="h-14">
-                                            <td className="h-14 w-16 text-center border border-black"><span>{appointment}</span></td>
-                                            <td className="h-14 w-64 border border-black"> <button className=" font-bold w-full h-full" onClick={(e) => handlerMakeReserve(appointment)}
+                                            <td className="h-14 w-16 text-center border-t border-slate-400"><span>{appointment}</span></td>
+                                            <td className="h-14 w-64 border-t border-l border-slate-400"> <button className=" font-bold w-full h-full" onClick={(e) => handlerMakeReserve(appointment)}
                                             >Available slot</button></td>
                                         </tr>
                                     )
@@ -81,13 +87,19 @@ export const TableReservations = () => {
                                 const height = (indexEnd - indexStart) * 3.5
                                 const top = indexStart * 3.5
                                 return (
-                                    <div key={e.id} className="w-64 ml-16 text-center bg-slate-600 absolute"
-                                        style={{
-                                            height: `${height}rem`,
-                                            top: `${top}rem`
-                                        }}
+                                    <div key={e.id}
+                                    className="w-64 ml-16 text-center bg-white absolute border border-slate-400 flex justify-center"
+                                    style={{
+                                        height: `${height}rem`,
+                                        top: `${top}rem`
+                                    }}
                                     >
-                                        <h2>{e.shiftStart} / {e.shiftEnd}</h2>
+                                        <div className="w-64 text-center bg-slate-600 absolute rounded-xl border border-slate-100 flex justify-center items-center"
+                                            style={{
+                                                height: `${height}rem`
+                                            }}>
+                                            <h2>{e.shiftStart} / {e.shiftEnd}</h2>
+                                        </div>
                                     </div>
                                 )
                             })
