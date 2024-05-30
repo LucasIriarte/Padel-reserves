@@ -118,9 +118,6 @@ const AsideReservation = ({ onClose, hourReserve }) => {
                 <div>
                     <AiOutlineCloseSquare className="h-8 w-8" onClick={onClose} />
                 </div>
-                <div>
-                    <button onClick={()=>dispatch(getReservesDay(booking))}>Probando</button>
-                </div>
                 <h1 className="text-center text-4xl font-bold font-bebas">Reservation at {hourReserve}</h1>
                 <h3 className="pl-8 pt-8 text-2xl">Information reserve</h3>
                 <form action="" className="flex flex-col items-start justify-around h-auto pl-8 pt-4 w-full">

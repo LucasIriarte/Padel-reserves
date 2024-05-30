@@ -17,7 +17,7 @@ function Header(){
         }
     },[user,dispatch])
     return (
-        <nav className="w-full bg-slate-100 drop-shadow-xl">
+        <nav className="w-full bg-slate-100 drop-shadow-xl bg-primary-4">
             <div className="h-16 w-16 flex">
                 <img src={img} alt="Icono padel" className="w-full"/>
             </div>
