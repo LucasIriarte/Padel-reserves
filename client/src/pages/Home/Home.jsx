@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Header from "../Header/Header";
+import Header from "../../components/Header/Header.jsx";
 import Banner from "/public/Banner.jpg";
-import { TableReservations } from "../TableReservations/TableReservations";
+import { TableReservations } from "../../components/TableReservations/TableReservations";
 
 
 function Home() {
