@@ -1,4 +1,5 @@
-import Header from "../../components/Header/Header"
+import Header from "../../components/Header/Header.jsx"
+import UserTable from "../../components/UserTable/UserTable.jsx"
 import { TableReservations } from "../../components/TableReservations/TableReservations"
 
 export const Admin = () => {
@@ -6,6 +7,7 @@ export const Admin = () => {
         <>
             <Header/>
             <TableReservations/>
+            <UserTable/>
         </>
     )
 }
