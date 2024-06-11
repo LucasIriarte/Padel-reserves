@@ -1,7 +1,11 @@
+import Header from "../../components/Header/Header"
+import { TableReservations } from "../../components/TableReservations/TableReservations"
+
 export const Admin = () => {
     return (
         <>
-            <h1>this is admin page</h1>
+            <Header/>
+            <TableReservations/>
         </>
     )
 }
