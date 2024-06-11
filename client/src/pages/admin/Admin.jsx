@@ -1,7 +1,13 @@
+import Header from "../../components/Header/Header.jsx"
+import UserTable from "../../components/UserTable/UserTable.jsx"
+import { TableReservations } from "../../components/TableReservations/TableReservations"
+
 export const Admin = () => {
     return (
         <>
-            <h1>this is admin page</h1>
+            <Header/>
+            <TableReservations/>
+            <UserTable/>
         </>
     )
 }
