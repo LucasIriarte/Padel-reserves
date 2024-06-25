@@ -7,6 +7,7 @@ import { getReservesDay } from "../../redux/reservesActions";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import Loading from "../../pages/Loading/Loading";
 
 
 
@@ -43,7 +44,7 @@ export const TableReservations = () => {
         setHourReserve(e)
     }
     if (reservesDay.loading) {
-        return <p>Loading...</p>;
+        return <Loading />;
     }
 
     if (reservesDay.error) {
