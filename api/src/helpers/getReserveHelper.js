@@ -1,11 +1,10 @@
 import { Reserve } from "../models/Reserve.js";
 
 
-export const getReservesHelpers = async (dateAppointment) => {
-    const day = dateAppointment.slice(0, 2)
-    const month = dateAppointment.slice(2, 4)
-    const year = dateAppointment.slice(4, 8)
-    const dateAppointmentFormated = `${day}/${month}/${year}`
+export const getReservesHelpers = async (date) => {
+    const dateSplited = date.split("/")
+    const dateAppointment = new Date(dateSplited[2], dateSplited[1], dateSplited[0])
+    const dateAppointmentFormated = `${dateAppointment.getDate()}/${dateAppointment.getMonth()}/${dateAppointment.getFullYear()}`
     console.log(dateAppointmentFormated)
     const reserves = await Reserve.findAll({
         where: {

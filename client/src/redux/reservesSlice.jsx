@@ -1,24 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllReserves } from './reservesActions.jsx';
+import { getReservesDay } from './reservesActions.jsx';
 
 
 const reservesSlice = createSlice({
-    name: "reserves",
+    name: "reservesDay",
     initialState:{
-        reserves:[],
+        reservesDay:[],
         loading: false,
         error:""
     },
     reducers:{},
     extraReducers: (builder)=>{
-        builder.addCase(getAllReserves.pending, (state, action)=>{
+        builder.addCase(getReservesDay.pending, (state, action)=>{
             state.loading = true
         }),
-        builder.addCase(getAllReserves.fulfilled, (state, action)=>{
+        builder.addCase(getReservesDay.fulfilled, (state, action)=>{
             state.loading = false
-            state.reserves = action.payload
+            state.reservesDay = action.payload
         }),
-        builder.addCase(getAllReserves.rejected, (state, action)=>{
+        builder.addCase(getReservesDay.rejected, (state, action)=>{
             state.loading = false
             state.error = action.error.message
         })
