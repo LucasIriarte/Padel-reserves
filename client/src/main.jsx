@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Auth0Provider } from '@auth0/auth0-react'
 import { LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://localhost:3001'
 
 const AUTH0_DOMAIN = import.meta.env.REACT_APP_AUTH0_DOMAIN
 const AUTH0_CLIENT_ID = import.meta.env.REACT_APP_AUTH0_CLIENT_ID
