@@ -1,8 +1,12 @@
 import { Sequelize } from "sequelize";
 import { Reserve } from "../models/Reserve.js";
-
+import { botWhatsapp } from "../botWhatsapp/botWhatsapp.js";
+import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config()
 
 export const postReserveHelper = async (dataReserve) => {
+    const PORT_BAILEYS = process.env.PORT_BAILEYS
     const { userName, dateAppointment, shiftStart, shiftEnd, phoneNumber, userId } = dataReserve
     // nos fijamos que no falte datos
     if (!userName || !dateAppointment || !shiftStart || !shiftEnd || !phoneNumber || !userId) {
@@ -52,5 +56,6 @@ export const postReserveHelper = async (dataReserve) => {
     }
     //si no hay ningun turno encontrado se crea el turno
     await Reserve.create({ userName, dateAppointment, shiftStart, shiftEnd, phoneNumber, userId })
+    await axios.post(`http://localhost:${PORT_BAILEYS}/send-message`,{userName, dateAppointment, shiftStart, shiftEnd, phoneNumber})
     return "Reserve created successfull!"
 }
