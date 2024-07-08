@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 const PORT_BAILEYS = process.env.PORT_BAILEYS
-const flowBienvenida = addKeyword("hello").addAnswer("Hello, welcome, we are a padel court, to reserve an appointment you can access our page http://example.com")
+const flowBienvenida = addKeyword("hello").addAnswer("Hello, welcome, we are a padel court, to reserve an appointment you can access our page http://localhost:5173/home")
 
 export async function botWhatsapp(){
     const provider = createProvider(BaileysProvider)
