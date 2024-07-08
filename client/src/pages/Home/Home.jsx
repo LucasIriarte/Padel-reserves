@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header.jsx";
 import Banner from "/public/Banner.jpg";
 import { TableReservations } from "../../components/TableReservations/TableReservations";
+import Footer from "../Footer/Footer.jsx";
 
 
 function Home() {
@@ -19,8 +20,9 @@ function Home() {
                 </div>
                 <TableReservations />
                 <div className="w-full">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13136.256790806689!2d-58.399323090306886!3d-34.60253811727183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4aa9f0a6da5edb%3A0x11bead4e234e558b!2sObelisco!5e0!3m2!1sen!2sar!4v1717088880103!5m2!1sen!2sar" className="w-3/4 mx-auto mt-10 h-80" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13136.256790806689!2d-58.399323090306886!3d-34.60253811727183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4aa9f0a6da5edb%3A0x11bead4e234e558b!2sObelisco!5e0!3m2!1sen!2sar!4v1717088880103!5m2!1sen!2sar" className="w-3/4 mx-auto mt-10 h-80" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                 </div>
+                <Footer></Footer>
             </div>
         </div>
     )
