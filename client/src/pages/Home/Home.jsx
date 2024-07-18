@@ -3,10 +3,21 @@ import Header from "../../components/Header/Header.jsx";
 import Banner from "/public/Banner.jpg";
 import { TableReservations } from "../../components/TableReservations/TableReservations";
 import Footer from "../Footer/Footer.jsx";
+import { useSelector } from "react-redux";
+import { Admin } from "../admin/Admin.jsx";
 
 
 function Home() {
+    const userDetails = useSelector((state) => state.users.userDetails)
+    console.log(userDetails.admin)
 
+    if (userDetails.admin) {
+        return (
+            <>
+                <Admin />
+            </>
+        )
+    }
     return (
         <div className="bg-slate-300">
             <Header />
