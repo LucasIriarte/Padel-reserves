@@ -8,7 +8,7 @@ import { getReservesDay } from "../../redux/reservesActions";
 
 const AsideReservation = ({ onClose, hourReserve }) => {
     const dispatch = useDispatch()
-    const userDetails = useSelector((state) => state.userDetails.userDetails)
+    const userDetails = useSelector((state) => state.users.userDetails)
     const booking = useSelector((state) => state.booking.booking)
     const shedules = useSelector((state) => state.shedules.shedules)
     const validName = /^[A-Za-z\s]+$/;

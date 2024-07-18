@@ -9,3 +9,11 @@ export const getUserDetails = createAsyncThunk(
         return data
     }
 )
+
+export const getUsers = createAsyncThunk(
+    "user/getUsers",
+    async (info) => {
+        const { data } = await axios.get("/users",info)
+        return data
+    }
+)
