@@ -7,7 +7,7 @@ import { getUsers } from "../../redux/usersActions"
 const UserTable = () => {
     const dispatch = useDispatch()
     const users = useSelector((state) => state.users.users)
-    
+
     useEffect(() => {
         dispatch(getUsers())
     }, [])
@@ -24,13 +24,17 @@ const UserTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users && users.map((user) => (
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.id}</td>
-                        </tr>
-                    ))}
+                    {
+                        users && users.map((user)=>{
+                            return(
+                                <tr key={user.id}>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.id}</td>
+                                </tr>
+                            )
+                        })
+                    }
                 </tbody>
             </table>
         </div>

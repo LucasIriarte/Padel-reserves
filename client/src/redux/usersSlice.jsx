@@ -5,8 +5,8 @@ import { getUserDetails, getUsers } from "./usersActions.jsx"
 export const userSlice = createSlice({
     name: "user",
     initialState:{
-        userDetails:"",
-        users:"",
+        userDetails:{},
+        users:[],
         loading:false,
         error:""
     },
